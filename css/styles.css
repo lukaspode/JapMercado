@@ -2,6 +2,30 @@
     font-family: 'Raleway', serif !important;
 }
 
+html {
+  overflow: scroll;
+  overflow-x: hidden;
+}
+::-webkit-scrollbar {
+  width: 3px;
+  background: transparent; 
+}
+::-webkit-scrollbar-thumb {
+  width: 2px;
+  background: green;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 .jumbotron .display-4{
     font-weight: bold;
 }

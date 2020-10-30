@@ -19,6 +19,4 @@ document.addEventListener("DOMContentLoaded", function(e){
         localStorage.setItem('email', userEmail);
         window.location.href = '/'
     };
-
-
 });

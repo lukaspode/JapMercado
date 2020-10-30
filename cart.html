@@ -9,6 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <title>eMercado - Todo lo que busques está aquí</title>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
   <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
@@ -45,54 +46,150 @@
     </div>
     <div class="container">
         <div class="row">
-            <div class="col text-right">
-                <div class="btn-group btn-group-toggle mb-4" data-toggle="buttons">
-                    <label class="btn btn-light active" id="sortAsc" >
-                        <input type="radio" name="options" autocomplete="off" checked>A-Z
-                    </label>
-                    <label class="btn btn-light" id="sortDesc" >
-                        <input type="radio" name="options" autocomplete="off">Z-A
-                    </label>
-                    <label class="btn btn-light" id="sortByCostDesc" >
-                        <input type="radio" name="options" autocomplete="off"><i class="fas fa-sort-amount-down mr-1"></i>Desc.
-                    </label>
-                    <label class="btn btn-light" id="sortByCostAsc" >
-                      <input type="radio" name="options" autocomplete="off"><i class="fas fa-sort-amount-up mr-1"></i>Asc.
-                  </label>
-                    <label class="btn btn-light" id="sortByRelev" >
-                      <input type="radio" name="options" autocomplete="off"><i class="fas fa-sort-amount-rel mr-1"></i>Relev.
-                  </label>
-                </div>
-            </div>
-        </div>
-        <div class="row">
             <div class="list-group col-9" id="cart-list-container">
             </div>
             <div class="list-group-item  col-3" >
-              <h5>Subtotal : </h5>
-              <div>
+              <small><dt>Subtotal : </dt></small> <!--SUBTOTAL-->
+              <dd>
                 <div class="row d-flex w-100 ">
-                  <h4 class=" col mb-1">USD: </h4>
-                  <div class="col d-flex w-100 justify-content-between">
-                    <h4 class="mb-1">  <p id="subtotal"></p></h4>                           
-                  </div>                            
-              </div>
-              </div>
-              <div>
+                    <h4 class=" col mb-1"><small>USD: </small></h4>
+                    <div class="col d-flex w-100 justify-content-between">
+                      <h4 class="mb-1">  <p id="subtotal"></p></h4>
+                    </div>                            
+                </div>
+              </dd>
+              <small><dt>Seleccione Envío: </dt></small> <!--TIPO ENVIO-->
+              <dd>
                 <form action="" method="post">
-                  <h6>Seleccione Envío: </h6>
-                    <input type="radio" style="display: block;" name="envio" id="envioGratis" required checked="checked" >
-                    <label class="envio" for="envioGratis"> Envío gratis:  $0</label><br>
-    
-                    <input type="radio" style="display: block;" name="envio" id="envioPremium" required>
-                    <label class="envio" for="envioPremium">Envío premium:  $80</label><br>
-                  
+                      <input  class="envioT" type="radio" style="display: block;" name="envio" id="envioStandar" value="0" required checked="checked" >
+                      <label for="envioStandar"><small> Standard (12 a 15 días) - Costo 5% del subtotal.</small></label><br>
+                      <input class="envioT" type="radio" style="display: block;" name="envio" value="1" id="envioExpress" required>
+                      <label for="envioExpress"><small>Express (5-8 días) - Costo 7% del subtotal.</small></label><br>
+                      <input class="envioT" type="radio" style="display: block;" name="envio" value="2" id="envioPremium" required>
+                      <label for="envioPremium"><small>Premium (2-5 días) - Costo 15% del subtotal.</small></label><br>
                 </form>
+              </dd>
+              <small><dt>Costo envío:</dt></small>  <!--COSTO ENVIO-->
+              <dd>
+                  <div class="row d-flex w-100 ">
+                        <h4 class=" col mb-1"><small>USD: </small></h4>
+                        <div class="col d-flex w-100 justify-content-between">
+                          <h4 class="mb-1"> <p id="costoEnvio"></p></h4>
+                        </div>                            
+                  </div>
+              </dd>
+
+                <div class="modal fade" id="compra" tabindex="-1" aria-labelledby="exampleCompra" aria-hidden="true"> <!--Ventana Compra-->
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleCompra">Seleccione su método de pago:</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="col modal-body">
+                        <button onclick="ocultarModalCompra()"type="button" class="btn btn-primary" data-toggle="modal" data-target="#credito">
+                          Crédito.
+                        </button>
+                        <button onclick="ocultarModalCompra()"type="button" class="btn btn-primary" data-toggle="modal" data-target="#transferencia">
+                          Transacción bancaria.
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="modal fade" id="credito" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"> <!--Credito (ventana)-->
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Ingrese datos de tarjeta:</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="col modal-body">
+                        <form id="submitD" class="row" action="">
+                          <div class="col">
+                            <dt>Nombre</dt>
+                            <dd><input type="text" placeholder="Juan" required></dd>
+                            <dt>Apellido</dt>
+                            <dd><input  type="text" placeholder="Pérez" required></dd>
+                            <dt>nro. de tarjeta</dt>
+                            <dd><input type="" pattern="[0-9]{13,16}" placeholder="entre 13-16 dígitos" required></dd>
+                          </div>
+                          <div class="col">
+                            <dt>Dirección</dt>
+                            <dd><input type="text" placeholder="calle 1234" required></dd>
+                            <dt>Fecha de vencimiento</dt>
+                            <dd><input type="date" placeholder="01/01/2015" required></dd>
+                            <dt>Codigo de seguridad</dt>
+                            <dd><input type="number" placeholder="123" required></dd>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" onclick="showModalCompra()" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <button type="button" onclick="creditoExitoso()" class="btn btn-primary">Aplicar</button>
+                          </div>
+                        </form>
+                      </div>
+                      
+                    </div>
+                  </div>
+                </div>
+
+                <div class="modal fade" id="transferencia" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"><!--Transaccion (ventana)-->
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Ingrese datos de transacción:</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <form id="submitT" class="row"  action="">
+                          <div class="col">
+                            <dt>Nombre</dt>
+                            <dd><input type="text" placeholder="Juan" required></dd>
+                            <dt>Apellido</dt>
+                            <dd><input type="text" placeholder="Pérez" required></dd>
+                            <dt>nro. de cuenta</dt>
+                            <dd><input type="number" placeholder="nro. de cuenta" required></dd>
+                          </div>
+                          <div class="col">
+                            <dt>Banco destinatario</dt>
+                            <dd><input type="text" placeholder="Santander/Itaú" required></dd>
+                            <dt>Nro. de cuenta (a transferir)</dt>
+                            <dd><input type="number" placeholder="nro. cuenta (a transferir)" required></dd>
+                            <dt>Codigo de seguridad</dt>
+                            <dd><input type="number" placeholder="123" required></dd>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" onclick="showModalCompra()" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <button type="button" onclick="transferenciaExitosa()" class="btn btn-primary">Aplicar</button>
+                          </div>
+                      </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              <dt>Total:</dt>
+              <dd>
+                  <div class="row d-flex w-100 ">   <!--TOTAL-->
+                    <h4 class=" col mb-1">USD: </h4>
+                    <div class="col d-flex w-100 justify-content-between">
+                      <h4 class="mb-1">  <p id="costoTotal"></p></h4>                           
+                    </div>                            
+                  </div>
+              </dd>
+
+              <!--Proceder Compra-->
+              <div class="container"> 
+                <button type="button" class="btn btn-primary btn-lg " data-toggle="modal" data-target="#compra" style="margin-top: 30px;">Proceder compra</button>
               </div>
-              <div class="container ">
-                <button class="btn btn-primary btn-lg " type="button" style="margin-top: 30px;">Finalizar compra</button>
-              </div>
-            </div>
+
         </div>
     </div>
   </main>

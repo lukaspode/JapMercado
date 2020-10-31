@@ -54,6 +54,6 @@ document.addEventListener("DOMContentLoaded", function(e){
 
   logout.onclick = function () {
     localStorage.removeItem('email');
-    window.location.href = 'login.html'
+    window.location.href = 'JapMercado/login.html'
   }
 });

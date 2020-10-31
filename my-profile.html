@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <title>eMercado - Todo lo que busques está aquí</title>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
   <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
@@ -53,80 +53,101 @@
       </div>
     </div>
   </nav>
+<main>
   <div class="text-center p-4">
     <h2>Mi Perfil</h2>
     <p class="lead">Estos son tus datos de contacto.</p>
   </div>
-  <div class="container p-5">
-    <div class="row">
-      <div class="col"><img id="imagenPerfil" src="" alt=""></div>
-      <div class="col">
-        <div class="row"><h1 id="userPerfil">Usuario</h1></div>
-        <div class="row"><p id="namePerfil">Nombre Apellido</p></div>
-      </div>
-    </div>
-    <div class="row">
-      <div>
-        <div class="row"><p> Email: <span id="emailPerfil"></span></p></div>
-        <div class="row"><p>Telefono: <span id="telPerfil"></span></p> </div>
-        <div class="row"><p>Edad: <span id="edadPerfil"></span></p></div>
-      </div>
-    </div>
-    <div class="container"> 
-      <button id="perfilButton" type="button" class="btn btn-primary btn-lg " data-toggle="modal" data-target="#editarPerfil" style="margin-top: 30px;">Editar perfil</button>
-    </div>
-
-    <div class="modal fade" id="editarPerfil" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"> <!--Ventana Editar-->
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Ingresa/Modifica tus datos:</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
+  <div class="container">
+    <div class="container">                                       <!--FOTO y USUARIO-->
+      <div class="row">
+        <div class="col-md-4">
+          <img class=" responsive-img" id="imagenPerfil" width="200px;" src="img/user_standar.png">
+          <button class="fa fa-camera"></button>
+        </div>
+        <div class="col-md-8">
+          <div class="row">
+            <div class="col-8">
+              <div class="row"><h1 id="userPerfil">Usuario</h1></div>
+              <div class="row"><p id="namePerfil">Nombre Apellido</p></div>
+            </div>
+            <div class="col-md-4">
+              <div class="container button"> 
+                <button id="perfilButton" type="button" class="btn btn-primary btn-lg " data-toggle="modal" data-target="#editarPerfil">Editar perfil</button>
+              </div>
+              <div class="modal fade" id="editarPerfil" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"> <!--Ventana Editar-->
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ingresa/Modifica tus datos:</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="col modal-body">
+                    <form id="submitP" class="row" action="">
+                      <div class="col">
+                        <dt>Nombre</dt>
+                        <dd><input id="nombreEdit" type="text" placeholder="Juan" required></dd>
+                        <dt>Apellido</dt>
+                        <dd><input id="apellidoEdit" type="text" placeholder="Pérez" required></dd>
+                        <dt>Usuario</dt>
+                        <dd><input id="userEdit" type="text" pattern="[a-z]{5,8}" placeholder="de 5-8 caractéres" required></dd>
+                      </div>
+                      <div class="col">
+                        <dt>Dirección</dt>
+                        <dd><input id="dirEdit" type="text" placeholder="calle 4132" required></dd>
+                        <dt>Fecha de Nacimiento</dt>
+                        <dd><input id="edadEdit" type="date" placeholder="01/01/2001" required></dd>
+                        <dt>Teléfono fijo/celular</dt>
+                        <dd><input id="telEdit" type="number" placeholder="09x-xxx-xxx" required></dd>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" onclick="" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button id="datosAplicados"type="button" onclick="datosEditados()" class="btn btn-primary">Aplicar</button>
+                      </div>
+                    </form>
+                  </div>
+                  
+                </div>
+              </div>
+              </div>
+            </div>
           </div>
-          <div class="col modal-body">
-            <form id="submitP" class="row" action="">
-              <div class="col">
-                <dt>Nombre</dt>
-                <dd><input id="nombreEdit" type="text" placeholder="Juan" required></dd>
-                <dt>Apellido</dt>
-                <dd><input id="apellidoEdit" type="text" placeholder="Pérez" required></dd>
-                <dt>Usuario</dt>
-                <dd><input id="userEdit" type="text" pattern="[a-z]{5,8}" placeholder="de 5-8 caractéres" required></dd>
-              </div>
-              <div class="col">
-                <dt>Dirección</dt>
-                <dd><input id="dirEdit" type="text" placeholder="calle 4132" required></dd>
-                <dt>Fecha de Nacimiento</dt>
-                <dd><input id="edadEdit" type="date" placeholder="01/01/2001" required></dd>
-                <dt>Teléfono fijo/celular</dt>
-                <dd><input id="telEdit" type="number" placeholder="09x-xxx-xxx" required></dd>
-              </div>
-              <div class="modal-footer">
-                <button type="button" onclick="" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button id="datosAplicados"type="button" onclick="datosEditados()" class="btn btn-primary">Aplicar</button>
-              </div>
-            </form>
-          </div>
-          
         </div>
       </div>
     </div>
 
-  </div>
-  <footer class="text-muted bg-light">
-    <div class="container">
-      <p>Este sitio forma parte de Desarrollo Web - JAP - 2020</p>
-      <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
+    <div class="container shadow-sm p-3"> <!--MAIL,TEL, etc-->
+          <div class="col-xs-8 tex ">
+            <div class="row mt-3 border-bottom">
+              <div class="col-md-6 border-right font-weight-light"><p> Email: </p></div>
+              <div class="col-md-6 font-weight-bold"><span id="emailPerfil"></span></div>
+            </div>
+            <div class="row mt-3 border-bottom">
+              <div class="col-md-6 border-right font-weight-light"><p> Teléfono: </p></div>
+              <div class="col-md-6 font-weight-bold"><span id="telPerfil"></span></div>
+            </div>
+            <div class="row mt-3 border-bottom">
+              <div class="col-md-6 border-right font-weight-light"><p> Edad: </span></p></div>
+              <div class="col-md-6 font-weight-bold"><span id="edadPerfil"></span></div>
+            </div>
+            <div class="row mt-3 border-bottom">
+              <div class="col-md-6 border-right font-weight-light"><p> Dirección: </span></p></div>
+              <div class="col-md-6 font-weight-bold"><span id="dirPerfil"></span></div>
+            </div>
+          </div>
     </div>
-  </footer>
-  <div class="alert fade alert-success" role="alert" id="alertResult">
-    <span id="resultSpan"></span>
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
   </div>
+</main>
+<footer class="text-muted bg-light" style="position: fixed;">
+  <div class="container">
+    <p class="float-right">
+      <a href="#">Volver arriba</a>
+    </p>
+    <p>Lucas Podestá - JAP - 2020</p>
+  </div>
+</footer>
   <div id="spinner-wrapper">
     <div class="lds-ring">
       <div></div>

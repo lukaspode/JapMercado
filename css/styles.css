@@ -72,6 +72,10 @@ input[type=number] {
 footer {
   padding-top: 3rem;
   padding-bottom: 3rem;
+  position: relative;
+  left: 0;
+  bottom: 0;
+  width: 100%;
 }
 
 footer p {
@@ -195,6 +199,8 @@ a.custom-card:hover {
   border-radius: 5px;
   transition: 0.3s;
 }
+
+
 
 #prod-actual{
   margin-bottom: 40px;
@@ -357,3 +363,6 @@ button:focus,
 input:focus {
   outline:0;
 }
+
+
+

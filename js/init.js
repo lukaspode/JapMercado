@@ -48,12 +48,12 @@ document.addEventListener("DOMContentLoaded", function(e){
   const logout = document.getElementById('logout');
 
   if(userEmail === null){
-    window.location.href = 'login.html'
+    window.location.href = '/login'
   }
   usuario.innerText= userEmail;
 
   logout.onclick = function () {
     localStorage.removeItem('email');
-    window.location.href = 'login.html'
+    window.location.href = '/login'
   }
 });

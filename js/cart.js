@@ -70,9 +70,14 @@ function showCart(array){
                     </div>
                     <div class="col">
                         <div class="d-flex w-100 justify-content-between">
-                            <h4 class="mb-1">`+ category.name + ` - ` + category.currency + ` ` + category.unitCost + `</h4>
-                                <div class="quantity">
-                                    <small class="text-muted">Cantidad:</small>
+                            <div>
+                                <h4 class="mb-1">`+ category.name + `</h4>
+                                <p><small>` + category.currency + ` ` + category.unitCost + `</small></p>
+                            </div>
+                            
+                            <div class="quantity">
+                                <small class="text-muted">Cantidad:</small>
+                                <div>
                                     <button class="button-p-m plus-btn" type="button" name="button">
                                         <img src="img/plus.svg" alt="" />
                                     </button>
@@ -81,6 +86,7 @@ function showCart(array){
                                         <img src="img/minus.svg" alt="" />
                                     </button>
                                 </div>
+                            </div>
                         </div>
                         
                     </div>
